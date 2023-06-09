@@ -32,4 +32,9 @@ public class SrvCarta {
         return repoCarta.findById(id);
     }
 
+    @Transactional
+    public void deleteById(Long id) {
+        repoCarta.deleteById(id);
+    }
+
 }

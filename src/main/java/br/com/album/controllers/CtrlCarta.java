@@ -1,10 +1,9 @@
 package br.com.album.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,4 +47,16 @@ public class CtrlCarta {
         .orElse(ResponseEntity.notFound().build());
     }
 
+    //DELETE
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<?> deleteCarta(@PathVariable Long id){
+        return srvCarta.findById(id)
+                .map(m -> {
+                    srvCarta.deleteById(id);
+                    return ResponseEntity.ok().body("DELETADO COM SUCESSO!");
+                }).orElse(ResponseEntity.notFound().build());
+    }
+
+
+    
 }
