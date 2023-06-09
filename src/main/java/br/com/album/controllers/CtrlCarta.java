@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,13 +44,28 @@ public class CtrlCarta {
     @GetMapping(path = "/find/{id}")
     public ResponseEntity<Carta> findCarta(@PathVariable Long id) {
         return srvCarta.findById(id)
-        .map(m -> ResponseEntity.ok().body(m))
-        .orElse(ResponseEntity.notFound().build());
+                .map(m -> ResponseEntity.ok().body(m))
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    //DELETE
+    // UPDATE
+    @PutMapping(path = "/update/{id}")
+    public ResponseEntity<Carta> updateCarta(@PathVariable Long id, @RequestBody Carta carta) {
+        return srvCarta.findById(id).map(m -> {
+            m.setNome(carta.getNome());
+            m.setEdicao(carta.getEdicao());
+            m.setPreco(carta.getPreco());
+            m.setRaridade(carta.getRaridade());
+
+            Carta udtCarta = srvCarta.save(carta);
+
+            return ResponseEntity.ok().body(udtCarta);
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    // DELETE
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<?> deleteCarta(@PathVariable Long id){
+    public ResponseEntity<?> deleteCarta(@PathVariable Long id) {
         return srvCarta.findById(id)
                 .map(m -> {
                     srvCarta.deleteById(id);
@@ -57,6 +73,4 @@ public class CtrlCarta {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
-
-    
 }
