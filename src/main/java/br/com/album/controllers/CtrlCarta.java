@@ -48,6 +48,22 @@ public class CtrlCarta {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // FINDBY EDICAO
+    @GetMapping(path = "/edicao/{edicao}")
+    public ResponseEntity<List<Carta>> findCartaByEdicao(@PathVariable String edicao) {
+        return srvCarta.findByEdicao(edicao)
+                .map(m -> ResponseEntity.ok().body(m))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // FINDBY RARIDADE
+    @GetMapping(path = "/raridade/{raridade}")
+    public ResponseEntity<List<Carta>> findCartaByRaridade(@PathVariable String raridade) {
+        return srvCarta.findByRaridade(raridade)
+                .map(m -> ResponseEntity.ok().body(m))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     // UPDATE
     @PutMapping(path = "/update/{id}")
     public ResponseEntity<Carta> updateCarta(@PathVariable Long id, @RequestBody Carta carta) {
