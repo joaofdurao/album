@@ -50,6 +50,11 @@ public class SrvCarta {
         return repoCarta.findByPrecoMenorQue(preco);
     }
 
+    // FINDBY PRECO MAIOR QUE
+    public Optional<List<Carta>> findByPrecoMaiorQue(Double preco) {
+        return repoCarta.findByPrecoMaiorQue(preco);
+    }
+
     // DELETE
     @Transactional
     public void deleteById(Long id) {
