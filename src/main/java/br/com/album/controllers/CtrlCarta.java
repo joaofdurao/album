@@ -80,6 +80,14 @@ public class CtrlCarta {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // FINDBY PRECO ENTRE
+    @GetMapping(path = "/precoentre/{precoMin}/{precoMax}")
+    public ResponseEntity<List<Carta>> findCartaByEntre(@PathVariable Double precoMin, @PathVariable Double precoMax) {
+        return srvCarta.findByPrecoEntre(precoMin, precoMax)
+                .map(m -> ResponseEntity.ok().body(m))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     // UPDATE
     @PutMapping(path = "/update/{id}")
     public ResponseEntity<Carta> updateCarta(@PathVariable Long id, @RequestBody Carta carta) {

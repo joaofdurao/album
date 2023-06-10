@@ -24,4 +24,8 @@ public interface RepoCarta extends JpaRepository<Carta, Long> {
     @Query("SELECT c FROM Carta c WHERE c.preco > :preco")
     Optional<List<Carta>> findByPrecoMaiorQue(Double preco);
 
+    // FINDBY PRECO ENTRE
+    @Query("SELECT c FROM Carta c WHERE c.preco BETWEEN :precoMin AND :precoMax")
+    Optional<List<Carta>> findByPrecoEntre(Double precoMin, Double precoMax);
+
 }

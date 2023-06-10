@@ -55,6 +55,11 @@ public class SrvCarta {
         return repoCarta.findByPrecoMaiorQue(preco);
     }
 
+    // FINDBY PRECO ENTRE
+    public Optional<List<Carta>> findByPrecoEntre(Double precoMin, Double PrecoMax) {
+        return repoCarta.findByPrecoEntre(precoMin, PrecoMax);
+    }
+
     // DELETE
     @Transactional
     public void deleteById(Long id) {
