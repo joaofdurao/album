@@ -16,8 +16,10 @@ public interface RepoCarta extends JpaRepository<Carta, Long> {
     // FINDBY RARIDADE
     Optional<List<Carta>> findByRaridade(String raridade);
 
-    // // FINDBY PRECO MENOR QUE
-    // @Query("SELECT c FROM Carta c WHERE p.preco < :preco")
-    // Optional<List<Carta>> findByPrecoMenorQue(Double preco);
+    // FINDBY PRECO MENOR QUE
+    @Query("SELECT c FROM Carta c WHERE c.preco < :preco")
+    Optional<List<Carta>> findByPrecoMenorQue(Double preco);
+
+    
 
 }

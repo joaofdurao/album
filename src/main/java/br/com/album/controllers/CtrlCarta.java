@@ -64,6 +64,14 @@ public class CtrlCarta {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // FINDBY PRECO MENOR QUE
+    @GetMapping(path = "/precomenor/{preco}")
+    public ResponseEntity<List<Carta>> findCartaByPrecoMenorQue(@PathVariable Double preco) {
+        return srvCarta.findByPrecoMenorQue(preco)
+                .map(m -> ResponseEntity.ok().body(m))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     // UPDATE
     @PutMapping(path = "/update/{id}")
     public ResponseEntity<Carta> updateCarta(@PathVariable Long id, @RequestBody Carta carta) {
